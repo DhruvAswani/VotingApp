@@ -134,7 +134,7 @@ router.get("/vote/count", async (req, res) => {
   }
 });
 
-router.get("/list", jwtAuthMiddleware, async (req, res) => {
+router.get("/list", async (req, res) => {
   try {
     const candidate = await Candidate.find();
     const response = candidate.map((data) => {
