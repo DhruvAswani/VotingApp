@@ -1,9 +1,5 @@
 import React from "react";
-
-const hoverHandle = () => {
-  const buttons = document.getElementsByTagName("a");
-  buttons[1].style.border;
-};
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -24,12 +20,13 @@ const Navbar = () => {
             >
               About
             </a>
-            <a
+
+            <Link
               className="hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md p-2 text-gray-400"
-              href="#"
+              to="/login"
             >
               Login
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

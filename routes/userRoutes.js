@@ -25,9 +25,9 @@ router.post("/signup", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const { aadharCardNumber, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ aadharCardNumber: aadharCardNumber });
+    const user = await User.findOne({ email: email });
 
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).send("AadharCardNumber or password not found");

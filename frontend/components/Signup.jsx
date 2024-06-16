@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import Typewriter from "./Typewriter";
 import Login from "./Login";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -169,13 +170,17 @@ const Signup = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <input
-            id="submit"
-            name="submit"
-            type="submit"
-            onClick={handleSubmit}
-            className="bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
+          <Link to={"/dashboard"}>
+            <button
+              id="submit"
+              name="submit"
+              type="submit"
+              onClick={handleSubmit}
+              className="bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+              Submit
+            </button>
+          </Link>
         </div>
       </form>
     </>
