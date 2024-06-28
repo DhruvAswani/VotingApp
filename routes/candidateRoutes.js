@@ -14,13 +14,13 @@ const checkAdminRole = async (userId) => {
   }
 };
 
-router.post("/", jwtAuthMiddleware, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    if (!(await checkAdminRole(req.user.userData.id))) {
-      return res.status(403).json("Unauthorized access");
-    } else {
-      console.log(req.user.userData.id);
-    }
+    // if (!(await checkAdminRole(req.user.userData.id))) {
+    //   return res.status(403).json("Unauthorized access");
+    // } else {
+    //   console.log(req.user.userData.id);
+    // }
 
     const data = req.body;
     const newCandidate = Candidate(data);
@@ -141,6 +141,47 @@ router.get("/list", async (req, res) => {
       return {
         name: data.name,
         party: data.party,
+        age: data.age,
+        votecount: data.voteCount,
+      };
+    });
+
+    return res.status(200).json({ response });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Some error occurred" });
+  }
+});
+
+router.get("/votes/:constituency", async (req, res) => {
+  try {
+    const constituency = req.params.constituency;
+    const candidate = await Candidate.find({ constituency: constituency });
+    const response = candidate.map((data) => {
+      return {
+        id: data._id,
+        value: data.voteCount,
+        label: data.name,
+      };
+    });
+
+    return res.status(200).json({ response });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Some error occurred" });
+  }
+});
+
+router.get("/list/:constituency", async (req, res) => {
+  try {
+    const constituency = req.params.constituency;
+    const candidate = await Candidate.find({ constituency: constituency });
+    const response = candidate.map((data) => {
+      return {
+        name: data.name,
+        party: data.party,
+        age: data.age,
+        votecount: data.voteCount,
       };
     });
 

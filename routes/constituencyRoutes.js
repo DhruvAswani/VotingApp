@@ -31,6 +31,24 @@ router.post("/addconstituency", async (req, res) => {
   }
 });
 
+router.delete("/deleteconstituency/:name", async (req, res) => {
+  try {
+    const name = req.params.name;
+    const query = { name: name };
+    const response = await Constituency.findOneAndDelete(query);
+
+    if (!response) {
+      console.log("No record found");
+      return res.status(404).json("No record found");
+    }
+
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Some error occurred" });
+  }
+});
+
 router.post("/addcandidates/:candidateId/:constituencyId", async (req, res) => {
   try {
     const candidateId = req.params.candidateId;

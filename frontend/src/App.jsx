@@ -8,6 +8,8 @@ import Adminpanel from "../components/Adminpanel";
 import Modal from "../components/AddConstituency";
 import ListConstituency from "../components/ListConstituency";
 import ConstituencyDetails from "../components/ConstituencyDetails";
+import { useState } from "react";
+import { MyContext } from "../src/MyContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -68,9 +70,13 @@ function App() {
     },
   ]);
 
+  const [text, setText] = useState("");
+
   return (
     <>
-      <RouterProvider router={router} />
+      <MyContext.Provider value={{ text, setText }}>
+        <RouterProvider router={router} />
+      </MyContext.Provider>
     </>
   );
 }
