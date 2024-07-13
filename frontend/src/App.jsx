@@ -10,6 +10,7 @@ import ListConstituency from "../components/ListConstituency";
 import ConstituencyDetails from "../components/ConstituencyDetails";
 import { useState } from "react";
 import { MyContext } from "../src/MyContext";
+import VotingPanel from "../components/VotingPanel";
 
 function App() {
   const router = createBrowserRouter([
@@ -46,7 +47,7 @@ function App() {
       element: (
         <>
           <Navbar />
-          <Signup />
+          <VotingPanel />
         </>
       ),
     },

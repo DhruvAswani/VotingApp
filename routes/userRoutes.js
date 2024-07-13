@@ -15,6 +15,7 @@ router.post("/signup", async (req, res) => {
     };
     const token = generateToken(payload);
     console.log("Token is ", token);
+    localStorage.setItem("token", jwt);
     res.status(200).json({ response: response, token: token });
   } catch (error) {
     console.log("Error occured");
@@ -38,6 +39,7 @@ router.post("/login", async (req, res) => {
     };
 
     const token = generateToken(payload);
+
     res.json({ token });
   } catch (error) {
     console.log(error);
@@ -51,6 +53,19 @@ router.get("/profile", jwtAuthMiddleware, async (req, res) => {
     const userId = data.userData.id;
     const user = await User.findById(userId);
 
+    res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({ error: "Internal server error" });
+  }
+});
+
+router.get("/getprofile/:name", async (req, res) => {
+  try {
+    const name = req.params.name;
+    const user = await User.findOne(name);
+    // const user = await User.findById(userId);
+    console.log(user);
     res.status(200).json({ user });
   } catch (error) {
     console.log(error);
